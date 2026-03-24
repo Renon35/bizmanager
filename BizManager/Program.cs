@@ -13,30 +13,16 @@ builder.Services.AddControllers()
     });
 
 // ─── Database: PostgreSQL (Supabase) ─────────────────────────────────────────
-// Railway sets DATABASE_URL env var; fallback to appsettings for local dev.
-var dbUrl = Environment.GetEnvironmentVariable("DATABASE_URL")
-            ?? builder.Configuration.GetConnectionString("DefaultConnection")
-            ?? throw new InvalidOperationException("DATABASE_URL is not set.");
+// Railway sets DATABASE_URL; fall back to appsettings for local dev.
+var rawDbUrl = Environment.GetEnvironmentVariable("DATABASE_URL")
+               ?? builder.Configuration.GetConnectionString("DefaultConnection");
 
-// Npgsql requires the URI scheme to be 'postgresql' or 'postgres'
-// and does NOT support double-@ in the URL, so we normalise here.
-var normalised = dbUrl.Replace("postgresql://", "").Replace("postgres://", "");
-// If user accidentally typed @@ instead of @, trim it:
-var atIdx = normalised.LastIndexOf('@');
-var connStr = atIdx >= 0
-    ? "Host=" + normalised[(atIdx + 1)..]
-        .Replace("/", ";Database=")
-        .Replace(":", ";Port=") + ";Username="
-        + normalised[..atIdx].Split(':')[0] + ";Password="
-        + string.Join(":", normalised[..atIdx].Split(':').Skip(1))
-        + ";SSL Mode=Require;Trust Server Certificate=true"
-    : dbUrl;
+if (string.IsNullOrWhiteSpace(rawDbUrl))
+    throw new InvalidOperationException(
+        "DATABASE_URL environment variable is not set. " +
+        "Add it in Railway → Service → Variables.");
 
-// Prefer using the raw URI directly — Npgsql supports it natively.
-// Just make sure the scheme is 'postgresql' (not 'postgres').
-var pgConnectionString = dbUrl.StartsWith("postgres://")
-    ? "postgresql://" + dbUrl["postgres://".Length..]
-    : dbUrl;
+var pgConnectionString = ConvertPostgresUri(rawDbUrl);
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(pgConnectionString, npgsql =>
@@ -48,7 +34,7 @@ var supabaseUrl = Environment.GetEnvironmentVariable("SUPABASE_URL")
 var supabaseKey = Environment.GetEnvironmentVariable("SUPABASE_KEY")
                   ?? builder.Configuration["Supabase:Key"] ?? "";
 
-builder.Services.AddSingleton<SupabaseStorageService>(sp =>
+builder.Services.AddSingleton<SupabaseStorageService>(_ =>
     new SupabaseStorageService(supabaseUrl, supabaseKey));
 
 builder.Services.AddSingleton<PdfService>();
@@ -101,3 +87,42 @@ app.MapFallbackToFile("index.html");
 // When running locally without that var, fall back to 5000.
 var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
 app.Run($"http://0.0.0.0:{port}");
+
+// ─── Helper: convert postgres:// URI → Npgsql Key=Value string ───────────────
+static string ConvertPostgresUri(string uri)
+{
+    // Normalise scheme
+    uri = uri.Trim();
+    if (uri.StartsWith("postgres://", StringComparison.OrdinalIgnoreCase))
+        uri = "postgresql://" + uri["postgres://".Length..];
+
+    if (!uri.StartsWith("postgresql://", StringComparison.OrdinalIgnoreCase))
+        return uri; // already Key=Value format, pass through
+
+    // Strip scheme
+    var rest = uri["postgresql://".Length..];
+
+    // Use LAST @ to safely handle passwords that contain @
+    var atIdx = rest.LastIndexOf('@');
+    if (atIdx < 0) throw new ArgumentException("Invalid PostgreSQL URI: missing @");
+
+    var userInfo = rest[..atIdx];       // e.g. "postgres:apexM80039534"
+    var hostInfo = rest[(atIdx + 1)..]; // e.g. "db.xxx.supabase.co:5432/postgres"
+
+    // Split user:password (password may contain colons)
+    var colonIdx = userInfo.IndexOf(':');
+    var user = colonIdx >= 0 ? userInfo[..colonIdx] : userInfo;
+    var pass = colonIdx >= 0 ? userInfo[(colonIdx + 1)..] : "";
+
+    // Split host:port/database
+    var slashIdx = hostInfo.IndexOf('/');
+    var hostPort = slashIdx >= 0 ? hostInfo[..slashIdx] : hostInfo;
+    var database = slashIdx >= 0 ? hostInfo[(slashIdx + 1)..] : "postgres";
+
+    var portColonIdx = hostPort.LastIndexOf(':');
+    var host = portColonIdx >= 0 ? hostPort[..portColonIdx] : hostPort;
+    var portStr = portColonIdx >= 0 ? hostPort[(portColonIdx + 1)..] : "5432";
+
+    return $"Host={host};Port={portStr};Database={database};Username={user};Password={pass};" +
+           "SSL Mode=Require;Trust Server Certificate=true";
+}
