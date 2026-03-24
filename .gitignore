@@ -1,0 +1,36 @@
+## Build outputs
+**/bin/
+**/obj/
+
+## SQLite database (local only — cloud uses PostgreSQL)
+BizManager/bizmanager.db
+BizManager/bizmanager.db-shm
+BizManager/bizmanager.db-wal
+
+## Secrets & environment files
+.env
+*.env.local
+
+## Scratch / test files
+BizManager/check_db.py
+BizManager/test_api.py
+BizManager/test_db.py
+BizManager/verify_fix.py
+BizManager/output.json
+create_test_excel.py
+test.js
+test_apis.ps1
+test_import.csx
+test_server.ps1
+test_upload.xlsx
+dummy.pdf
+
+## Visual Studio / Rider
+.vs/
+*.user
+*.suo
+.idea/
+
+## OS
+.DS_Store
+Thumbs.db

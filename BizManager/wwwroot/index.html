@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BizManager — İşletme Yönetim Sistemi</title>
+  <meta name="description"
+    content="Markalar, bayiler, ürünler, siparişler, teklifler ve satışları yönetmek için dahili işletme yönetim sistemi." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css?v=1.1" />
+</head>
+
+<body>
+  <div id="app">
+    <!-- Kenar Çubuğu -->
+    <aside id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <rect width="24" height="24" rx="6" fill="#1a56db" />
+            <path d="M7 8h10M7 12h10M7 16h6" stroke="white" stroke-width="2" stroke-linecap="round" />
+          </svg>
+          <span>BizManager</span>
+        </div>
+      </div>
+      <nav id="main-nav">
+        <a href="#dashboard" class="nav-item active" data-page="dashboard">
+          <svg viewBox="0 0 24 24">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+            <polyline points="9,22 9,12 15,12 15,22" />
+          </svg>
+          Ana Panel
+        </a>
+        <div class="nav-section">Katalog</div>
+        <a href="#brands" class="nav-item" data-page="brands">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 8v4l3 3" />
+          </svg>
+          Markalar
+        </a>
+        <a href="#catalogs" class="nav-item" data-page="catalogs">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
+          </svg>
+          Kataloglar
+        </a>
+        <a href="#catalog-analysis" class="nav-item" data-page="catalog-analysis">
+          <svg viewBox="0 0 24 24">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+            <polyline points="14 2 14 8 20 8" />
+            <line x1="12" y1="18" x2="12" y2="12" />
+            <line x1="9" y1="15" x2="15" y2="15" />
+          </svg>
+          Katalog Analizi
+        </a>
+        <a href="#products" class="nav-item" data-page="products">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
+          </svg>
+          Ürünler
+        </a>
+        <div class="nav-section">Tedarik</div>
+        <a href="#dealers" class="nav-item" data-page="dealers">
+          <svg viewBox="0 0 24 24">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+          </svg>
+          Bayiler
+        </a>
+        <a href="#dealer-stock" class="nav-item" data-page="dealer-stock">
+          <svg viewBox="0 0 24 24">
+            <rect x="2" y="3" width="20" height="14" rx="2" />
+            <path d="M8 21h8M12 17v4" />
+          </svg>
+          Bayi Stoku
+        </a>
+        <a href="#import" class="nav-item" data-page="import">
+          <svg viewBox="0 0 24 24">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+            <polyline points="17,8 12,3 7,8" />
+            <line x1="12" y1="3" x2="12" y2="15" />
+          </svg>
+          Excel İçe Aktar
+        </a>
+        <a href="#purchase-orders" class="nav-item" data-page="purchase-orders">
+          <svg viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2" />
+            <rect x="9" y="3" width="6" height="4" rx="1" />
+            <path d="M9 12h6M9 16h4" />
+          </svg>
+          Satın Alma Siparişleri
+        </a>
+        <a href="#shipments" class="nav-item" data-page="shipments">
+          <svg viewBox="0 0 24 24">
+            <rect x="1" y="3" width="15" height="13" rx="1" />
+            <path d="M16 8h4l3 3v5h-7V8z" />
+            <circle cx="5.5" cy="18.5" r="2.5" />
+            <circle cx="18.5" cy="18.5" r="2.5" />
+          </svg>
+          Sevkiyatlar
+        </a>
+        <div class="nav-section">Satış</div>
+        <a href="#sales-reps" class="nav-item" data-page="sales-reps">
+          <svg viewBox="0 0 24 24">
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          Satış Temsilcileri
+        </a>
+        <a href="#customers" class="nav-item" data-page="customers">
+          <svg viewBox="0 0 24 24">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+          </svg>
+          Müşteriler
+        </a>
+        <div class="nav-group">Satış</div>
+        <a href="#quotations" class="nav-item" data-page="quotations">
+          <svg viewBox="0 0 24 24">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <polyline points="14 2 14 8 20 8" />
+            <line x1="16" y1="13" x2="8" y2="13" />
+            <line x1="16" y1="17" x2="8" y2="17" />
+            <polyline points="10 9 9 9 8 9" />
+          </svg>
+          Satış Teklifleri
+        </a>
+        <a href="#sales-orders" class="nav-item" data-page="sales-orders">
+          <svg viewBox="0 0 24 24">
+            <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+            <polyline points="13 2 13 9 20 9" />
+          </svg>
+          Satış Siparişleri
+        </a>
+        <a href="#sales-shipments" class="nav-item" data-page="sales-shipments">
+          <svg viewBox="0 0 24 24">
+            <rect x="1" y="3" width="15" height="13" />
+            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+            <circle cx="5.5" cy="18.5" r="2.5" />
+            <circle cx="18.5" cy="18.5" r="2.5" />
+          </svg>
+          Satış Sevkiyatları
+        </a>
+        <a href="#sales" class="nav-item" data-page="sales">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+          </svg>
+          Satış Gelirleri
+        </a>
+        <a href="#invoices" class="nav-item" data-page="invoices">
+          <svg viewBox="0 0 24 24">
+            <rect x="2" y="5" width="20" height="14" rx="2" />
+            <path d="M2 10h20" />
+          </svg>
+          Faturalar
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Ana İçerik -->
+    <main id="main-content">
+      <header id="top-header">
+        <div id="page-title">Ana Panel</div>
+        <div class="header-right">
+          <span id="current-time"></span>
+        </div>
+      </header>
+      <div id="page-content"></div>
+    </main>
+  </div>
+
+  <!-- Bildirim -->
+  <div id="toast-container"></div>
+
+  <!-- Modal -->
+  <div id="modal-overlay" class="hidden">
+    <div id="modal-box">
+      <div id="modal-header">
+        <h3 id="modal-title"></h3>
+        <button id="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="/js/app.js?v=1.2"></script>
+  <script src="/js/dashboard.js?v=1.3"></script>
+  <script src="/js/brands.js?v=1.3"></script>
+  <script src="/js/catalogs.js?v=1.3"></script>
+  <script src="/js/dealers.js?v=1.3"></script>
+  <script src="/js/products.js?v=1.3"></script>
+  <script src="/js/dealer-stock.js?v=1.2"></script>
+  <script src="/js/purchase-orders.js?v=1.2"></script>
+  <script src="/js/shipments.js?v=1.2"></script>
+  <script src="/js/sales-reps.js?v=1.2"></script>
+  <script src="/js/customers.js?v=1.3"></script>
+  <script src="/js/quotations.js?v=2.0"></script>
+  <script src="/js/sales-orders.js?v=2.0"></script>
+  <script src="/js/sales-shipments.js?v=1.3"></script>
+  <script src="/js/sales.js?v=1.3"></script>
+  <script src="/js/invoices.js?v=1.2"></script>
+  <script src="/js/import.js?v=1.4"></script>
+  <script src="/js/catalog-analysis.js?v=1.0"></script>
+</body>
+
+</html>

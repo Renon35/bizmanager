@@ -1,0 +1,14 @@
+C:\Users\serta\.gemini\antigravity\scratch\bizmanager\ImportTest\bin\Debug\net10.0\ImportTest.exe
+C:\Users\serta\.gemini\antigravity\scratch\bizmanager\ImportTest\bin\Debug\net10.0\ImportTest.deps.json
+C:\Users\serta\.gemini\antigravity\scratch\bizmanager\ImportTest\bin\Debug\net10.0\ImportTest.runtimeconfig.json
+C:\Users\serta\.gemini\antigravity\scratch\bizmanager\ImportTest\bin\Debug\net10.0\ImportTest.dll
+C:\Users\serta\.gemini\antigravity\scratch\bizmanager\ImportTest\bin\Debug\net10.0\ImportTest.pdb
+C:\Users\serta\.gemini\antigravity\scratch\bizmanager\ImportTest\obj\Debug\net10.0\ImportTest.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\serta\.gemini\antigravity\scratch\bizmanager\ImportTest\obj\Debug\net10.0\ImportTest.AssemblyInfoInputs.cache
+C:\Users\serta\.gemini\antigravity\scratch\bizmanager\ImportTest\obj\Debug\net10.0\ImportTest.AssemblyInfo.cs
+C:\Users\serta\.gemini\antigravity\scratch\bizmanager\ImportTest\obj\Debug\net10.0\ImportTest.csproj.CoreCompileInputs.cache
+C:\Users\serta\.gemini\antigravity\scratch\bizmanager\ImportTest\obj\Debug\net10.0\ImportTest.dll
+C:\Users\serta\.gemini\antigravity\scratch\bizmanager\ImportTest\obj\Debug\net10.0\refint\ImportTest.dll
+C:\Users\serta\.gemini\antigravity\scratch\bizmanager\ImportTest\obj\Debug\net10.0\ImportTest.pdb
+C:\Users\serta\.gemini\antigravity\scratch\bizmanager\ImportTest\obj\Debug\net10.0\ImportTest.genruntimeconfig.cache
+C:\Users\serta\.gemini\antigravity\scratch\bizmanager\ImportTest\obj\Debug\net10.0\ref\ImportTest.dll
