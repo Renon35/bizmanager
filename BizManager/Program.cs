@@ -74,7 +74,7 @@ builder.WebHost.ConfigureKestrel(serverOptions =>
 var app = builder.Build();
 
 // Apply DB schema at startup
-DbMigrator.ApplyMigrations(app);
+DbMigrator.ApplyMigrations(pgConnectionString);
 
 app.UseCors();
 app.UseStaticFiles();

@@ -1,17 +1,12 @@
-using BizManager.Data;
 using Npgsql;
 
 namespace BizManager.Services;
 
 public static class DbMigrator
 {
-    public static void ApplyMigrations(WebApplication app)
+    public static void ApplyMigrations(string connectionString)
     {
-        using var scope = app.Services.CreateScope();
-        var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-
-        // Use raw Npgsql connection — do NOT call EnsureCreated() on pooler connections.
-        var conn = (NpgsqlConnection)db.Database.GetDbConnection();
+        using var conn = new NpgsqlConnection(connectionString);
         conn.Open();
 
         try
